@@ -1,0 +1,22 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Deny",
+            "Action": [
+                "ecs:DeleteTaskDefinitions",
+                "ecs:ListTagsForResource",
+                "ecs:RunTask",
+                "ecs:StartTask",
+                "ecs:TagResource",
+                "ecs:UntagResource"
+            ],
+            "Resource": "arn:aws:ecs:*:*:task-definition/MySensitiveTaskDefinitionFamilyName:*"
+        }
+    ]
+}

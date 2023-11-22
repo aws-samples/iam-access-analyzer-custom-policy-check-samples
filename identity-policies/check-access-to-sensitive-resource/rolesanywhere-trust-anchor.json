@@ -1,0 +1,25 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Deny",
+            "Action": [
+                "rolesanywhere:DeleteTrustAnchor",
+                "rolesanywhere:DisableTrustAnchor",
+                "rolesanywhere:EnableTrustAnchor",
+                "rolesanywhere:GetTrustAnchor",
+                "rolesanywhere:PutNotificationSettings",
+                "rolesanywhere:ResetNotificationSettings",
+                "rolesanywhere:TagResource",
+                "rolesanywhere:UntagResource",
+                "rolesanywhere:UpdateTrustAnchor"
+            ],
+            "Resource": "arn:aws:rolesanywhere:*:*:trust-anchor/MySensitiveTrustAnchorId"
+        }
+    ]
+}

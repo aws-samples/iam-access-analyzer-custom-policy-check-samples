@@ -1,0 +1,20 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": "*",
+        "Resource": "*"
+      },
+      {
+        "Effect": "Deny",
+        "Action": "ec2:TerminateInstances",
+        "Resource": "*",
+        "Condition": {
+          "Null": {
+            "aws:ResourceTag/use-your-own-tag-key-here": "true"
+          }
+        }
+      }
+    ]
+}

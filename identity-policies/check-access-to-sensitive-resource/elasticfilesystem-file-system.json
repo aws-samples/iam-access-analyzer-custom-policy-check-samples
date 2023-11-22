@@ -1,0 +1,47 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Deny",
+            "Action": [
+                "elasticfilesystem:Backup",
+                "elasticfilesystem:ClientMount",
+                "elasticfilesystem:ClientRootAccess",
+                "elasticfilesystem:ClientWrite",
+                "elasticfilesystem:CreateAccessPoint",
+                "elasticfilesystem:CreateMountTarget",
+                "elasticfilesystem:CreateReplicationConfiguration",
+                "elasticfilesystem:CreateTags",
+                "elasticfilesystem:DeleteFileSystem",
+                "elasticfilesystem:DeleteFileSystemPolicy",
+                "elasticfilesystem:DeleteMountTarget",
+                "elasticfilesystem:DeleteReplicationConfiguration",
+                "elasticfilesystem:DeleteTags",
+                "elasticfilesystem:DescribeAccessPoints",
+                "elasticfilesystem:DescribeBackupPolicy",
+                "elasticfilesystem:DescribeFileSystemPolicy",
+                "elasticfilesystem:DescribeFileSystems",
+                "elasticfilesystem:DescribeLifecycleConfiguration",
+                "elasticfilesystem:DescribeMountTargetSecurityGroups",
+                "elasticfilesystem:DescribeMountTargets",
+                "elasticfilesystem:DescribeReplicationConfigurations",
+                "elasticfilesystem:DescribeTags",
+                "elasticfilesystem:ListTagsForResource",
+                "elasticfilesystem:ModifyMountTargetSecurityGroups",
+                "elasticfilesystem:PutBackupPolicy",
+                "elasticfilesystem:PutFileSystemPolicy",
+                "elasticfilesystem:PutLifecycleConfiguration",
+                "elasticfilesystem:Restore",
+                "elasticfilesystem:TagResource",
+                "elasticfilesystem:UntagResource",
+                "elasticfilesystem:UpdateFileSystem"
+            ],
+            "Resource": "arn:aws:elasticfilesystem:*:*:file-system/MySensitiveFileSystemId"
+        }
+    ]
+}

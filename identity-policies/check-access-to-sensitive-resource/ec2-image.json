@@ -1,0 +1,43 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Deny",
+            "Action": [
+                "ec2:CancelImageLaunchPermission",
+                "ec2:CopyImage",
+                "ec2:CreateFleet",
+                "ec2:CreateImage",
+                "ec2:CreateReplaceRootVolumeTask",
+                "ec2:CreateRestoreImageTask",
+                "ec2:CreateStoreImageTask",
+                "ec2:CreateTags",
+                "ec2:DeleteTags",
+                "ec2:DeregisterImage",
+                "ec2:DescribeImageAttribute",
+                "ec2:DisableFastLaunch",
+                "ec2:DisableImage",
+                "ec2:DisableImageDeprecation",
+                "ec2:EnableFastLaunch",
+                "ec2:EnableImage",
+                "ec2:EnableImageDeprecation",
+                "ec2:ExportImage",
+                "ec2:ImportImage",
+                "ec2:ModifyFleet",
+                "ec2:ModifyImageAttribute",
+                "ec2:RegisterImage",
+                "ec2:RequestSpotFleet",
+                "ec2:RequestSpotInstances",
+                "ec2:ResetImageAttribute",
+                "ec2:RestoreImageFromRecycleBin",
+                "ec2:RunInstances"
+            ],
+            "Resource": "arn:aws:ec2:*:*:image/ami-123456"
+        }
+    ]
+}

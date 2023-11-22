@@ -1,0 +1,52 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Deny",
+            "Action": [
+                "dynamodb:BatchGetItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:ConditionCheckItem",
+                "dynamodb:CreateBackup",
+                "dynamodb:CreateGlobalTable",
+                "dynamodb:CreateTable",
+                "dynamodb:CreateTableReplica",
+                "dynamodb:DeleteItem",
+                "dynamodb:DeleteTableReplica",
+                "dynamodb:EnableKinesisStreamingDesintation",
+                "dynamodb:DisableKinesisStreamingDestination",
+                "dynamodb:ExportTableToPointInTime",
+                "dynamodb:GetItem",
+                "dynamodb:ImportTable",
+                "dynamodb:PartiQLDelete",
+                "dynamodb:PartiQLInsert",
+                "dynamodb:PartiQLSelect",
+                "dynamodb:PartiQLUpdate",
+                "dynamodb:PutItem",
+                "dynamodb:Query",
+                "dynamodb:RestoreTableFromAwsBackup",
+                "dynamodb:RestoreTableFromBackup",
+                "dynamodb:RestoreTableToPointInTime",
+                "dynamodb:Scan",
+                "dynamodb:StartAwsBackupJob",
+                "dynamodb:TagResource",
+                "dynamodb:UntagResource",
+                "dynamodb:UpdateContinuousBackups",
+                "dynamodb:UpdateContributorInsights",
+                "dynamodb:UpdateGlobalTable",
+                "dynamodb:UpdateGlobalTableSettings",
+                "dynamodb:UpdateGlobalTableVersion",
+                "dynamodb:UpdateItem",
+                "dynamodb:UpdateTable",
+                "dynamodb:UpdateTableReplicaAutoScaling",
+                "dynamodb:UpdateTimeToLive"
+            ],
+            "Resource": "arn:aws:dynamodb:*:*:table/MySensitiveTable"
+        }
+    ]
+}

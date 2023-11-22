@@ -1,0 +1,24 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Deny",
+            "Action": [
+                "ecs:CreateService",
+                "ecs:DeleteService",
+                "ecs:DescribeServices",
+                "ecs:ListTagsForResource",
+                "ecs:TagResource",
+                "ecs:UntagResource",
+                "ecs:UpdateService",
+                "ecs:UpdateServicePrimaryTaskSet"
+            ],
+            "Resource": "arn:aws:ecs:*:*:service/MyCluster/MySensitiveServiceName"
+        }
+    ]
+}

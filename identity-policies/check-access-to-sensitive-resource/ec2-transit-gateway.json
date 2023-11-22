@@ -1,0 +1,29 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Deny",
+            "Action": [
+                "ec2:CreateFlowLogs",
+                "ec2:CreateNetworkInsightsPath",
+                "ec2:CreateTags",
+                "ec2:CreateTransitGateway",
+                "ec2:CreateTransitGatewayMulticastDomain",
+                "ec2:CreateTransitGatewayPeeringAttachment",
+                "ec2:CreateTransitGatewayPolicyTable",
+                "ec2:CreateTransitGatewayRouteTable",
+                "ec2:CreateTransitGatewayVpcAttachment",
+                "ec2:CreateVpnConnection",
+                "ec2:DeleteTags",
+                "ec2:DeleteTransitGateway",
+                "ec2:ModifyTransitGateway"
+            ],
+            "Resource": "arn:aws:ec2:*:*:transit-gateway/tgw-123456"
+        }
+    ]
+}

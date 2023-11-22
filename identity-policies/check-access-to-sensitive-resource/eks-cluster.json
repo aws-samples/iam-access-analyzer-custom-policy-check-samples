@@ -1,0 +1,36 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Deny",
+            "Action": [
+                "eks:AccessKubernetesApi",
+                "eks:AssociateEncryptionConfig",
+                "eks:AssociateIdentityProviderConfig",
+                "eks:CreateAddon",
+                "eks:CreateFargateProfile",
+                "eks:CreateNodegroup",
+                "eks:DeleteCluster",
+                "eks:DeregisterCluster",
+                "eks:DescribeCluster",
+                "eks:DescribeUpdate",
+                "eks:ListAddons",
+                "eks:ListFargateProfiles",
+                "eks:ListIdentityProviderConfigs",
+                "eks:ListNodegroups",
+                "eks:ListTagsForResource",
+                "eks:ListUpdates",
+                "eks:TagResource",
+                "eks:UntagResource",
+                "eks:UpdateClusterConfig",
+                "eks:UpdateClusterVersion"
+            ],
+            "Resource": "arn:aws:eks:*:*:cluster/MySensitiveCluster"
+        }
+    ]
+}

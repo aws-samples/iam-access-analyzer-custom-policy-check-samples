@@ -1,0 +1,42 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Deny",
+            "Action": [
+                "ssm:AddTagsToResource",
+                "ssm:CreateAssociation",
+                "ssm:CreateAssociationBatch",
+                "ssm:CreateDocument",
+                "ssm:DeleteAssociation",
+                "ssm:DeleteDocument",
+                "ssm:DescribeAssociation",
+                "ssm:DescribeDocument",
+                "ssm:DescribeDocumentParameters",
+                "ssm:DescribeDocumentPermission",
+                "ssm:GetCalendar",
+                "ssm:GetCalendarState",
+                "ssm:GetDocument",
+                "ssm:ListDocumentMetadataHistory",
+                "ssm:ListDocumentVersions",
+                "ssm:ListTagsForResource",
+                "ssm:ModifyDocumentPermission",
+                "ssm:PutCalendar",
+                "ssm:RemoveTagsFromResource",
+                "ssm:SendCommand",
+                "ssm:StartSession",
+                "ssm:UpdateAssociation",
+                "ssm:UpdateAssociationStatus",
+                "ssm:UpdateDocument",
+                "ssm:UpdateDocumentDefaultVersion",
+                "ssm:UpdateDocumentMetadata"
+            ],
+            "Resource": "arn:aws:ssm:*:*:document/MySensitiveDocumentName"
+        }
+    ]
+}

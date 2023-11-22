@@ -1,0 +1,54 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Deny",
+            "Action": [
+                "rds:AddRoleToDBCluster",
+                "rds:AddTagsToResource",
+                "rds:ApplyPendingMaintenanceAction",
+                "rds:BacktrackDBCluster",
+                "rds:CreateBlueGreenDeployment",
+                "rds:CreateDBCluster",
+                "rds:CreateDBClusterEndpoint",
+                "rds:CreateDBClusterSnapshot",
+                "rds:CreateDBInstance",
+                "rds:CreateDBInstanceReadReplica",
+                "rds:CreateGlobalCluster",
+                "rds:CreateIntegration",
+                "rds:DeleteDBCluster",
+                "rds:DeregisterDBProxyTargets",
+                "rds:DescribeDBClusterAutomatedBackups",
+                "rds:DescribeDBClusterBacktracks",
+                "rds:DescribeDBClusterEndpoints",
+                "rds:DescribeDBClusters",
+                "rds:DescribeDBProxyTargets",
+                "rds:DescribePendingMaintenanceActions",
+                "rds:FailoverDBCluster",
+                "rds:FailoverGlobalCluster",
+                "rds:ListTagsForResource",
+                "rds:ModifyCurrentDBClusterCapacity",
+                "rds:ModifyDBCluster",
+                "rds:PromoteReadReplicaDBCluster",
+                "rds:RebootDBCluster",
+                "rds:RemoveFromGlobalCluster",
+                "rds:RemoveRoleFromDBCluster",
+                "rds:RemoveTagsFromResource",
+                "rds:RestoreDBClusterFromS3",
+                "rds:RestoreDBClusterFromSnapshot",
+                "rds:RestoreDBClusterToPointInTime",
+                "rds:StartActivityStream",
+                "rds:StartDBCluster",
+                "rds:StopActivityStream",
+                "rds:StopDBCluster",
+                "rds:SwitchoverGlobalCluster"
+            ],
+            "Resource": "arn:aws:rds:*:*:cluster:MySensitiveClusterName"
+        }
+    ]
+}

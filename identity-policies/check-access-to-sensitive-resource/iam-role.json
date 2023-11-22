@@ -1,0 +1,48 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": "*"
+        },
+        {
+            "Effect": "Deny",
+            "Action": [
+                "iam:AttachRolePolicy",
+                "iam:CreateRole",
+                "iam:CreateServiceLinkedRole",
+                "iam:DeleteRole",
+                "iam:DeleteRolePermissionsBoundary",
+                "iam:DeleteRolePolicy",
+                "iam:DeleteServiceLinkedRole",
+                "iam:DetachRolePolicy",
+                "iam:GenerateServiceLastAccessedDetails",
+                "iam:GetContextKeysForPrincipalPolicy",
+                "iam:GetRole",
+                "iam:GetRolePolicy",
+                "iam:GetServiceLinkedRoleDeletionStatus",
+                "iam:ListAttachedRolePolicies",
+                "iam:ListInstanceProfilesForRole",
+                "iam:ListPoliciesGrantingServiceAccess",
+                "iam:ListRolePolicies",
+                "iam:ListRoleTags",
+                "iam:PassRole",
+                "iam:PutRolePermissionsBoundary",
+                "iam:PutRolePolicy",
+                "iam:SimulatePrincipalPolicy",
+                "iam:TagRole",
+                "iam:UntagRole",
+                "iam:UpdateAssumeRolePolicy",
+                "iam:UpdateRole",
+                "iam:UpdateRoleDescription",
+                "sts:AssumeRole",
+                "sts:TagSession",
+                "sts:SetSourceIdentity",
+                "sts:AssumeRoleWithSAML",
+                "sts:AssumeRoleWithWebIdentity"
+            ],
+            "Resource": "arn:aws:iam::*:role/MySensitiveRole"
+        }
+    ]
+}
