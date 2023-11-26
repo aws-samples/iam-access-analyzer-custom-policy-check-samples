@@ -2,13 +2,13 @@
 
 This repository contains a collection of sample reference policies that can be used with the Access Analyzer's CheckNoNewAccess API.  The CheckNoNewAccess API checks an existing policy against a new policy and returns PASS if no new access is detected in the new policy and FAIL if new access is detected in the new policy.
 
-The reference policies in this repository are meant to be passed to the ExistingPolicyDocument parameter of the CheckNoNewAccess API.  You then pass the IAM policy you're attempting to check for new access (referred to as the candidate-policy in this README) in the NewPolicyDocument parameter.  Example:
+The reference policies in this repository are meant to be passed to the ExistingPolicyDocument parameter of the CheckNoNewAccess API.  You then pass the IAM policy you're attempting to check for new access (referred to as the candidate-policy in this repository) in the NewPolicyDocument parameter.  Example:
 
 ```
 aws access-analyzer check-no-new-access --existing-policy-document file://reference-policy.json --new-policy-document file://candidate-policy.json --policy-type IDENTITY_POLICY 
 ```
 
-The CheckNoNewAccess API supports both identity policies and resource policies and is built on Zelkova, which translates IAM policies into equivalent logical statements, and runs a suite of general-purpose and specialized logical solvers (satisfiability modulo theories) against the problem.
+The CheckNoNewAccess API supports both identity policies and resource policies and is built on Zelkova, which translates IAM policies into equivalent logical statements, and runs a suite of general-purpose and specialized logical solvers (satisfiability modulo theories) against the problem. To learn more about satisfiability modulo theories, see [Satisfiability Modulo Theories](https://people.eecs.berkeley.edu/~sseshia/pubdir/SMT-BookChapter.pdf).
 
 ### What are reference policies?
 
@@ -67,14 +67,14 @@ The example reference policies in this repository are divided into two top-level
 ***Identity policies***
 
 - **check-access-to-sensitive-resource** - Checks for access to a sensitive resource. You should replace the placeholder ARN with the ARN of your sensitive resource to the deny statement. You can add more than one resource if you want to check for multiple sensitive resources. You can also add or remove actions depending on the actions you want to check access for.  You can also combine reference policies by appending multiple deny statements to a single allow statement.  Checking access to a sensitive resource is the type of example shown in Example 1 above.
-- **check-for-tag-based-access** - Checks that access that uses a certain action is constrained by a tagging condition key.  For example, ```run-ec2-instance.md``` checks that a policy only allows access to run an EC2 instance if a specific tagging condition key is specified.  The reference policy [```act-on-ec2-instance.md```](identity-policies/check-for-tag-based-access/act-on-ec2-instance.md) checks that a policy can only grant access to terminate an EC2 instance for a particular resource tag value. You could use this type of reference policy to help enforce certain tag based access control strategies in your development process.
+- **check-for-tag-based-access** - Checks that access that uses a certain action is constrained by a tagging condition key.  For example, the reference policy [```run-ec2-instance-with-tag.md```](identity-policies/check-for-tag-based-access/run-ec2-instance-with-tag.md) checks that a policy only allows access to run an EC2 instance if a specific tagging condition key is specified.  The reference policy [```act-on-ec2-instance-with-tag.md```](identity-policies/check-for-tag-based-access/act-on-ec2-instance-with-tag.md) checks that a policy can only grant access to terminate an EC2 instance for a particular resource tag value. You could use this type of reference policy to help enforce certain tag based access control strategies in your development process.
 
 
 ***Resource policies***
 
 - **check-who-is-granted-access** - Checks that a resource policy only allows access to a specific principal or set of principals. Examples suffixed with ```-specific-actions``` only check that specific, potentially sensitive actions are restricted to a principal or principals. Other actions in these examples are not checked. Examples suffixed with ```-all-actions``` check that all actions are only granted to a specific principal or set of principals.
 
-    The introduction of the ```Principal``` element makes writing these reference policies slightly different.  The reference policy allows the principal(s) that can be granted access, using both the ```Principal``` element and ```aws:PrincipalArn``` condition key. For the examples that only check for specific actions, add an extra statement to allow all remaining actions using the ```NotAction``` element. See [```s3-specific-actions.md```](resource-policies/check-who-has-access-to-my-resource/s3-specific-actions.md) for an example.
+    The introduction of the ```Principal``` element makes writing these reference policies slightly different.  The reference policy allows the principal(s) that can be granted access, using both the ```Principal``` element and ```aws:PrincipalArn``` condition key. For the examples that only check for specific actions, add an extra statement to allow all remaining actions using the ```NotAction``` element. See [```s3-specific-actions.md```](resource-policies/check-who-is-granted-access/s3-specific-actions.md) for an example.
 
 
 
