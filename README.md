@@ -5,7 +5,7 @@ This repository contains a collection of sample reference policies that can be u
 The reference policies in this repository are meant to be passed to the ExistingPolicyDocument parameter of the CheckNoNewAccess API.  You then pass the IAM policy you're attempting to check for new access (referred to as the candidate-policy in this repository) in the NewPolicyDocument parameter.  Example:
 
 ```
-aws access-analyzer check-no-new-access --existing-policy-document file://reference-policy.json --new-policy-document file://candidate-policy.json --policy-type IDENTITY_POLICY 
+aws accessanalyzer check-no-new-access --existing-policy-document file://reference-policy.json --new-policy-document file://candidate-policy.json --policy-type IDENTITY_POLICY 
 ```
 
 The CheckNoNewAccess API supports both identity policies and resource policies and is built on Zelkova, which translates IAM policies into equivalent logical statements, and runs a suite of general-purpose and specialized logical solvers (satisfiability modulo theories) against the problem. To learn more about satisfiability modulo theories, see [Satisfiability Modulo Theories](https://people.eecs.berkeley.edu/~sseshia/pubdir/SMT-BookChapter.pdf).
