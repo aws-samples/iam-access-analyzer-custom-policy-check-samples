@@ -12,7 +12,9 @@ The CheckNoNewAccess API supports both identity policies and resource policies a
 
 ### What are reference policies?
 
-You use a reference policy to check if a candidate policy allows more access than the reference policy does.  With properly crafted reference policies, this allows you to make assertions like:
+You use a reference policy to check if a candidate policy allows more access than the reference policy does. Worded differently, the check passes if the candidate policy is a subset of the reference policy.  
+
+With properly crafted reference policies, this allows you to make assertions like:
 
 - This policy does not grant access to my sensitive resource.
 - Only these principals are allowed to access my sensitive resource.
