@@ -2,7 +2,9 @@
 
 #### Use case
 
-This reference policy checks that a candidate trust policy only grants access to an allow-listed set of AWS services. This enables you to allow builders to create roles, but constrain the use of those roles to the set of AWS services specified.
+This reference policy checks that a candidate trust policy only grants access to an allowlisted set of AWS services. This enables you to allow builders to create roles, but constrain the use of those roles to the set of AWS services specified.
+
+You should modify the reference policy to specify your set of allowlisted service principals.
 
 #### Reference policy
 ```json
@@ -46,7 +48,7 @@ The statement allows all other STS actions, except for ```sts:AssumeRole```.  Th
 
 #### Examples of candidate policies that pass the check against the reference policy
 
-###### Candidate policy 1: PASS - allows only an allow-listed AWS service principal
+###### Candidate policy 1: PASS - allows an allowlisted AWS service principal
 ```json
 {
   "Version": "2012-10-17",
@@ -61,7 +63,6 @@ The statement allows all other STS actions, except for ```sts:AssumeRole```.  Th
   ]
 }
 ```
-
 
 ###### Candidate policy 2: PASS - allows AssumeRoleWithWebIdentity access to an OIDC provider. A check for AssumeRoleWithWebIdentity can be implemented separately, if needed.
 ```json
@@ -81,7 +82,7 @@ The statement allows all other STS actions, except for ```sts:AssumeRole```.  Th
 
 #### Examples of candidate policies that fail the check against the reference policy
 
-###### Candidate policy 3: FAIL - allows access to an AWS service principal that is not allow-listed
+###### Candidate policy 3: FAIL - allows access to an AWS service principal that is not allowlisted
 ```json
 {
   "Version": "2012-10-17",

@@ -2,7 +2,10 @@
 
 #### Use case
 
-This reference policy checks for unwanted use of OIDC and SAML federation in IAM role trust policies. The check only passes if an allow-listed SAML provider is used and fails if a SAML provider that is not allow-listed is used or if any OIDC provider is used.
+This reference policy checks for unwanted use of OIDC and SAML federation in IAM role trust policies. The check only passes if an allowlisted SAML provider is used and fails if a SAML provider that is not allowlisted is used or if any OIDC provider is used.
+
+You should modify the reference policy to specify your allowlisted SAML provider.
+
 
 #### Reference policy
 ```json
@@ -47,7 +50,7 @@ The statement allows all other STS actions, except for ```sts:AssumeRoleWithWebI
 
 #### Examples of candidate policies that pass the check against the reference policy
 
-###### Candidate policy 1: PASS - allows only the allow-listed SAML provider
+###### Candidate policy 1: PASS - allows only the allowlisted SAML provider
 ```json
 {
   "Version": "2012-10-17",
@@ -96,7 +99,7 @@ The statement allows all other STS actions, except for ```sts:AssumeRoleWithWebI
 }
 ```
 
-###### Candidate policy 4: FAIL - allows access to a SAML provider that was not allow-listed in the reference policy
+###### Candidate policy 4: FAIL - allows access to a SAML provider that was not allowlisted in the reference policy
 ```json
 {
   "Version": "2012-10-17",
