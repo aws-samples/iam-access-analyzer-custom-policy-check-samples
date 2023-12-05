@@ -1,14 +1,8 @@
 ## Check that an IAM role trust policy only allows access to a particular IAM SAML identity provider
 
-#### Description
+#### Use case
 
-This reference policy checks that an IAM role trust policy only grants access to a particular SAML identity provider using the ```Principal``` element of the trust policy.  This check looks for the ```sts:AssumeRoleWithSAML``` action. 
-
-This reference policy can help check for unwanted use of federation in IAM role trust policies.
-
-The check fails if a candidate policy grants access to any other identity provider, whether SAML or OIDC. The ```sts:AssumeRoleWithWebIdentity``` action is excluded from the ```AllowOtherSTSActions``` statement to ensure that the check fails if this action is used. 
-
-Note that you need to specify an account ID in the ```Principal/Federated``` element. You can do this, at scale, by dynamically populating the account ID before running the check. This also assumes that the SAML provider is named the same in every account.
+This reference policy checks for unwanted use of OIDC and SAML federation in IAM role trust policies. The check only passes if an allow-listed SAML provider is used and fails if a SAML provider that is not allow-listed is used or if any OIDC provider is used.
 
 #### Reference policy
 ```json
@@ -35,6 +29,21 @@ Note that you need to specify an account ID in the ```Principal/Federated``` ele
   ]
 }
 ```
+
+#### Description
+
+The check fails if a candidate policy grants access to any identity provider not listed, whether SAML or OIDC.
+
+```Statement: "AllowSpecificSamlProvider"```
+
+This statement checks that an IAM role trust policy only grants access to a particular SAML identity provider using the ```Principal/Federated``` element of a role's trust policy.  This check looks for the ```sts:AssumeRoleWithSAML``` action. 
+
+Note that you need to specify an account ID in the ```Principal/Federated``` element. You can do this, at scale, by dynamically populating the account ID before running the check. This also assumes that the SAML provider is named the same in every account.
+
+```Statement: AllowOtherSTSActions```
+
+The statement allows all other STS actions, except for ```sts:AssumeRoleWithWebIdentity``` and ```sts:AssumeRoleWithSAML```.  The ```sts:AssumeRoleWithSAML``` action is covered by the ```AllowSpecificSamlProvider``` statement. The ```sts:AssumeRoleWithWebIdentity``` action is excluded and implicitly denied to prevent its use entirely. This statement allows the check to succeed for other STS actions.
+
 
 #### Examples of candidate policies that pass the check against the reference policy
 
