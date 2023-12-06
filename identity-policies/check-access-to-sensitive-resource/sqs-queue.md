@@ -49,37 +49,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive queue
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"sqs:AddPermission",
-				"sqs:DeleteQueue",
-				"sqs:DeleteMessage"
-			],
-			"Resource": "arn:aws:sqs:*:*:MyNotSensitiveQueueName"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sqs:AddPermission",
+                "sqs:DeleteQueue",
+                "sqs:DeleteMessage"
+            ],
+            "Resource": "arn:aws:sqs:*:*:MyNotSensitiveQueueName"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive queue
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "sqs:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:sqs:*:*:MySensitiveQueueName"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "sqs:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:sqs:*:*:MySensitiveQueueName"
+        }
+    ]
 }
 ```
 
@@ -88,41 +88,41 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the DeleteQueue action on MySensitiveQueueName
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "sqs:DeleteQueue",
-			"Resource": "arn:aws:sqs:*:*:MySensitiveQueueName"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "sqs:DeleteQueue",
+            "Resource": "arn:aws:sqs:*:*:MySensitiveQueueName"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use the DeleteMessage action and MySensitiveQueueName is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "sqs:DeleteMessage",
-			"Resource": "arn:aws:sqs:*:*:*Sensitive*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "sqs:DeleteMessage",
+            "Resource": "arn:aws:sqs:*:*:*Sensitive*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 5: FAIL - grants access to use all sqs actions and MySensitiveQueueName is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "sqs:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "sqs:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

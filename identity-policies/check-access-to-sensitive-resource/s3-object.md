@@ -63,37 +63,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to objects in sensitive bucket
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"s3:DeleteObject",
-				"s3:PutObject",
-				"s3:GetObject"
-			],
-			"Resource": "arn:aws:s3:::my-not-sensitive-bucket/*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:DeleteObject",
+                "s3:PutObject",
+                "s3:GetObject"
+            ],
+            "Resource": "arn:aws:s3:::my-not-sensitive-bucket/*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to objects in sensitive bucket
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "s3:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:s3:::my-sensitive-bucket/*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "s3:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:s3:::my-sensitive-bucket/*"
+        }
+    ]
 }
 ```
 
@@ -102,41 +102,41 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the PutObject action on objects in sensitive bucket
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "s3:PutObject",
-			"Resource": "arn:aws:s3:::my-sensitive-bucket/*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::my-sensitive-bucket/*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use the GetObject action and objects in sensitive bucket are included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "s3:GetObject",
-			"Resource": "arn:aws:s3:*:*:*sensitive*/*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:*:*:*sensitive*/*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 5: FAIL - grants access to use all S3 actions and objects in sensitive bucket are included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "s3:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "s3:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

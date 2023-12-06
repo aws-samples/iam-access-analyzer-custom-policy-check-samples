@@ -61,37 +61,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive filesystem
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"elasticfilesystem:Backup",
-				"elasticfilesystem:ClientMount",
-				"elasticfilesystem:ClientRootAccess"
-			],
-			"Resource": "arn:aws:elasticfilesystem:*:*:file-system/MyNotSensitiveFileSystemId"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "elasticfilesystem:Backup",
+                "elasticfilesystem:ClientMount",
+                "elasticfilesystem:ClientRootAccess"
+            ],
+            "Resource": "arn:aws:elasticfilesystem:*:*:file-system/MyNotSensitiveFileSystemId"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive filesystem
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "elasticfilesystem:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:elasticfilesystem:*:*:file-system/MySensitiveFileSystemId"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "elasticfilesystem:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:elasticfilesystem:*:*:file-system/MySensitiveFileSystemId"
+        }
+    ]
 }
 ```
 
@@ -100,27 +100,27 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the ClientMount action on MySensitiveFileSystemId
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "elasticfilesystem:ClientMount",
-			"Resource": "arn:aws:elasticfilesystem:*:*:file-system/MySensitiveFileSystemId"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "elasticfilesystem:ClientMount",
+            "Resource": "arn:aws:elasticfilesystem:*:*:file-system/MySensitiveFileSystemId"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 3: FAIL - grants access to use all EFS actions and the sensitive filesystem is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "elasticfilesystem:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "elasticfilesystem:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

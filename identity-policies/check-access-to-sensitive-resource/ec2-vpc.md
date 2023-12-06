@@ -66,37 +66,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive VPC
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"ec2:AttachInternetGateway",
-				"ec2:DeleteVpc",
-				"ec2:CreateVpcPeeringConnection"
-			],
-			"Resource": "arn:aws:ec2:*:*:vpc/vpc-not-sensitive"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:AttachInternetGateway",
+                "ec2:DeleteVpc",
+                "ec2:CreateVpcPeeringConnection"
+            ],
+            "Resource": "arn:aws:ec2:*:*:vpc/vpc-not-sensitive"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive VPC
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ec2:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:ec2:*:*:vpc/vpc-sensitive"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ec2:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:ec2:*:*:vpc/vpc-sensitive"
+        }
+    ]
 }
 ```
 
@@ -105,27 +105,27 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the AttachInternetGateway action on the sensitive VPC
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ec2:AttachInternetGateway",
-			"Resource": "arn:aws:ec2:*:*:vpc/vpc-sensitive"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ec2:AttachInternetGateway",
+            "Resource": "arn:aws:ec2:*:*:vpc/vpc-sensitive"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use all EC2 actions and the sensitive VPC is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ec2:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ec2:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

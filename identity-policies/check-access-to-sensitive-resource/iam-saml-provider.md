@@ -37,37 +37,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive SAML provider
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"iam:DeleteSAMLProvider",
-				"iam:UntagSAMLProvider",
-				"iam:UpdateSAMLProvider"
-			],
-			"Resource": "arn:aws:iam::*:saml-provider/MyNotSensitiveSamlProvider"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:DeleteSAMLProvider",
+                "iam:UntagSAMLProvider",
+                "iam:UpdateSAMLProvider"
+            ],
+            "Resource": "arn:aws:iam::*:saml-provider/MyNotSensitiveSamlProvider"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive SAML provider
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "iam:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:iam::*:saml-provider/MySensitiveSamlProvider"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "iam:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:iam::*:saml-provider/MySensitiveSamlProvider"
+        }
+    ]
 }
 ```
 
@@ -76,41 +76,41 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the UntagSAMLProvider action on MySensitiveSamlProvider
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "iam:UntagSAMLProvider",
-			"Resource": "arn:aws:iam::*:saml-provider/MySensitiveSamlProvider"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "iam:UntagSAMLProvider",
+            "Resource": "arn:aws:iam::*:saml-provider/MySensitiveSamlProvider"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use the UpdateSAMLProvider action and MySensitiveSamlProvider is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "iam:UpdateSAMLProvider",
-			"Resource": "arn:aws:iam:*:*:saml-provider/*Sensitive*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "iam:UpdateSAMLProvider",
+            "Resource": "arn:aws:iam:*:*:saml-provider/*Sensitive*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 5: FAIL - grants access to use all iam actions and MySensitiveSamlProvider is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "iam:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "iam:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

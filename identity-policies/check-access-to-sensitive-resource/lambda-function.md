@@ -74,37 +74,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive function
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"lambda:AddPermission",
-				"lambda:CreateAlias",
-				"lambda:DeleteFunction"
-			],
-			"Resource": "arn:aws:lambda:*:*:function:MyNotSensitiveFunctionName"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "lambda:AddPermission",
+                "lambda:CreateAlias",
+                "lambda:DeleteFunction"
+            ],
+            "Resource": "arn:aws:lambda:*:*:function:MyNotSensitiveFunctionName"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive function
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "lambda:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:lambda:*:*:function:MySensitiveFunctionName"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "lambda:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:lambda:*:*:function:MySensitiveFunctionName"
+        }
+    ]
 }
 ```
 
@@ -113,41 +113,41 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the CreateAlias action on MySensitiveFunctionName
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "lambda:CreateAlias",
-			"Resource": "arn:aws:lambda:*:*:function:MySensitiveFunctionName"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "lambda:CreateAlias",
+            "Resource": "arn:aws:lambda:*:*:function:MySensitiveFunctionName"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use the DeleteFunction action and MySensitiveFunctionName is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "lambda:DeleteFunction",
-			"Resource": "arn:aws:lambda:*:*:function:*Sensitive*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "lambda:DeleteFunction",
+            "Resource": "arn:aws:lambda:*:*:function:*Sensitive*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 5: FAIL - grants access to use all lambda actions and MySensitiveFunctionName is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "lambda:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "lambda:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

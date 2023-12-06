@@ -59,37 +59,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive cluster
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"redshift:DeleteCluster",
-				"redshift:DisableLogging",
-				"redshift:ModifyCluster"
-			],
-			"Resource": "arn:aws:redshift:*:*:cluster:MyNotSensitiveClusterName"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "redshift:DeleteCluster",
+                "redshift:DisableLogging",
+                "redshift:ModifyCluster"
+            ],
+            "Resource": "arn:aws:redshift:*:*:cluster:MyNotSensitiveClusterName"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive cluster
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "redshift:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:redshift:*:*:cluster:MySensitiveClusterName"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "redshift:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:redshift:*:*:cluster:MySensitiveClusterName"
+        }
+    ]
 }
 ```
 
@@ -98,41 +98,41 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the DisableLogging action on MySensitiveClusterName
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "redshift:DisableLogging",
-			"Resource": "arn:aws:redshift:*:*:cluster:MySensitiveClusterName"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "redshift:DisableLogging",
+            "Resource": "arn:aws:redshift:*:*:cluster:MySensitiveClusterName"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use the ModifyCluster action and MySensitiveClusterName is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "redshift:ModifyCluster",
-			"Resource": "arn:aws:redshift:*:*:cluster:*Sensitive*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "redshift:ModifyCluster",
+            "Resource": "arn:aws:redshift:*:*:cluster:*Sensitive*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 5: FAIL - grants access to use all redshift actions and MySensitiveClusterName is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "redshift:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "redshift:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

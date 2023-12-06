@@ -56,37 +56,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive document
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"ssm:DeleteAssociation",
-				"ssm:DeleteDocument",
-				"ssm:SendCommand"
-			],
-			"Resource": "arn:aws:ssm:*:*:document/MyNotSensitiveDocumentName"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ssm:DeleteAssociation",
+                "ssm:DeleteDocument",
+                "ssm:SendCommand"
+            ],
+            "Resource": "arn:aws:ssm:*:*:document/MyNotSensitiveDocumentName"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive document
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ssm:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:ssm:*:*:document/MySensitiveDocumentName"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ssm:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:ssm:*:*:document/MySensitiveDocumentName"
+        }
+    ]
 }
 ```
 
@@ -95,41 +95,41 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the DeleteDocument action on MySensitiveDocumentName
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ssm:DeleteDocument",
-			"Resource": "arn:aws:ssm:*:*:document/MySensitiveDocumentName"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ssm:DeleteDocument",
+            "Resource": "arn:aws:ssm:*:*:document/MySensitiveDocumentName"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use the SendCommand action and MySensitiveDocumentName is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ssm:SendCommand",
-			"Resource": "arn:aws:ssm:*:*:document/*Sensitive*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ssm:SendCommand",
+            "Resource": "arn:aws:ssm:*:*:document/*Sensitive*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 5: FAIL - grants access to use all ssm actions and MySensitiveDocumentName is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ssm:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ssm:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

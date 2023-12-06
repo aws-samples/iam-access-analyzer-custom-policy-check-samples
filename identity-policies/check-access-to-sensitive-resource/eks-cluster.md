@@ -50,37 +50,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive cluster
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"eks:AccessKubernetesApi",
-				"eks:DeleteCluster",
-				"eks:UpdateClusterConfig"
-			],
-			"Resource": "arn:aws:eks:*:*:cluster/MyNotSensitiveCluster"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "eks:AccessKubernetesApi",
+                "eks:DeleteCluster",
+                "eks:UpdateClusterConfig"
+            ],
+            "Resource": "arn:aws:eks:*:*:cluster/MyNotSensitiveCluster"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive cluster
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "eks:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:eks:*:*:cluster/MySensitiveCluster"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "eks:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:eks:*:*:cluster/MySensitiveCluster"
+        }
+    ]
 }
 ```
 
@@ -89,41 +89,41 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the DeleteCluster action on MySensitiveCluster
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "eks:DeleteCluster",
-			"Resource": "arn:aws:eks:*:*:cluster/MySensitiveCluster"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "eks:DeleteCluster",
+            "Resource": "arn:aws:eks:*:*:cluster/MySensitiveCluster"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use the AccessKubernetesApi action and MySensitiveCluster is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "eks:AccessKubernetesApi",
-			"Resource": "arn:aws:eks:*:*:cluster/*Sensitive*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "eks:AccessKubernetesApi",
+            "Resource": "arn:aws:eks:*:*:cluster/*Sensitive*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 5: FAIL - grants access to use all EKS actions and MySensitiveCluster is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "eks:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "eks:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

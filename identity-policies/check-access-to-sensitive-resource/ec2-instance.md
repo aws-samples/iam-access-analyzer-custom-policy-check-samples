@@ -75,37 +75,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive instance
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"ec2:StopInstances",
-				"ec2:TerminateInstances",
-				"ec2:CreateImage"
-			],
-			"Resource": "arn:aws:ec2:*:*:i-not-sensitive"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:StopInstances",
+                "ec2:TerminateInstances",
+                "ec2:CreateImage"
+            ],
+            "Resource": "arn:aws:ec2:*:*:i-not-sensitive"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive instance
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ec2:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:ec2:*:*:instance/i-sensitive"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ec2:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:ec2:*:*:instance/i-sensitive"
+        }
+    ]
 }
 ```
 
@@ -114,27 +114,27 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the TerminateInstances action on the sensitive instance
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ec2:TerminateInstances",
-			"Resource": "arn:aws:ec2:*:*:instance/i-sensitive"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ec2:TerminateInstances",
+            "Resource": "arn:aws:ec2:*:*:instance/i-sensitive"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use all EC2 actions and the sensitive instance is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ec2:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ec2:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

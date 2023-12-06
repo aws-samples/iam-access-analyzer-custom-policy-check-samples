@@ -36,37 +36,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive task definition
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"ecs:DeleteTaskDefinitions",
-				"ecs:StartTask",
-				"ecs:RunTask"
-			],
-			"Resource": "arn:aws:ecs:*:*:task-definition/MyNotSensitiveTaskDefinitionFamilyName:*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ecs:DeleteTaskDefinitions",
+                "ecs:StartTask",
+                "ecs:RunTask"
+            ],
+            "Resource": "arn:aws:ecs:*:*:task-definition/MyNotSensitiveTaskDefinitionFamilyName:*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive task definition
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ecs:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:ecs:*:*:task-definition/MySensitiveTaskDefinitionFamilyName:*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ecs:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:ecs:*:*:task-definition/MySensitiveTaskDefinitionFamilyName:*"
+        }
+    ]
 }
 ```
 
@@ -75,41 +75,41 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the DeleteTaskDefinitions action on MySensitiveTaskDefinitionFamilyName
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ecs:DeleteTaskDefinitions",
-			"Resource": "arn:aws:ecs:*:*:task-definition/MySensitiveTaskDefinitionFamilyName:*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ecs:DeleteTaskDefinitions",
+            "Resource": "arn:aws:ecs:*:*:task-definition/MySensitiveTaskDefinitionFamilyName:*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use the RunTask action and * is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ecs:RunTask",
-			"Resource": "arn:aws:ecs:*:*:task-definition/*Sensitive*:*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ecs:RunTask",
+            "Resource": "arn:aws:ecs:*:*:task-definition/*Sensitive*:*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 5: FAIL - grants access to use all ECS actions and MySensitiveTaskDefinitionFamilyName is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ecs:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ecs:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

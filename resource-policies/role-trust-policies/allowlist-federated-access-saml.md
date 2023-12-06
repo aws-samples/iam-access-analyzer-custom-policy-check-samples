@@ -70,8 +70,8 @@ The statement allows all other STS actions, except for ```sts:AssumeRoleWithWebI
 ###### Candidate policy 2: PASS - allows AssumeRole access to a service principal. A check for AssumeRole can be implemented separately, if needed.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [{
+    "Version": "2012-10-17",
+    "Statement": [{
         "Effect": "Allow",
         "Principal": {
             "Service": "ec2.amazonaws.com"

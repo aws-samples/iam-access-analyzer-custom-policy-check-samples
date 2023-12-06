@@ -62,37 +62,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive role
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"iam:AttachRolePolicy",
-				"iam:DeleteRole",
-				"iam:PassRole"
-			],
-			"Resource": "arn:aws:iam::*:role/MyNotSensitiveRole"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:AttachRolePolicy",
+                "iam:DeleteRole",
+                "iam:PassRole"
+            ],
+            "Resource": "arn:aws:iam::*:role/MyNotSensitiveRole"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive role
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "iam:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:iam::*:role/MySensitiveRole"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "iam:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:iam::*:role/MySensitiveRole"
+        }
+    ]
 }
 ```
 
@@ -101,41 +101,41 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the DeleteRole action on MySensitiveRole
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "iam:DeleteRole",
-			"Resource": "arn:aws:iam::*:role/MySensitiveRole"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "iam:DeleteRole",
+            "Resource": "arn:aws:iam::*:role/MySensitiveRole"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use the PassRole action and MySensitiveRole is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "iam:PassRole",
-			"Resource": "arn:aws:iam:*:*:role/*Sensitive*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "iam:PassRole",
+            "Resource": "arn:aws:iam:*:*:role/*Sensitive*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 5: FAIL - grants access to use all iam actions and MySensitiveRole is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "iam:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "iam:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

@@ -60,8 +60,8 @@ The introduction of the ```Principal``` element makes writing these reference po
 ###### Candidate policy 1: PASS - allows GetObject access and not PutObject access
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [{
+    "Version": "2012-10-17",
+    "Statement": [{
         "Effect": "Allow",
         "Principal": {
             "AWS": "*"
@@ -80,8 +80,8 @@ The introduction of the ```Principal``` element makes writing these reference po
 ###### Candidate policy 2: PASS - allows PutObject access to one of the privileged roles using the Principal element 
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [{
+    "Version": "2012-10-17",
+    "Statement": [{
         "Effect": "Allow",
         "Principal": {
             "AWS": "arn:aws:iam::111111111111:role/MyPrivilegedRole"
@@ -95,8 +95,8 @@ The introduction of the ```Principal``` element makes writing these reference po
 ###### Candidate policy 3: PASS - allows PutObject access to one of the privileged roles using the aws:PrincipalArn condition key 
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [{
+    "Version": "2012-10-17",
+    "Statement": [{
         "Effect": "Allow",
         "Principal": {
             "AWS": "*"
@@ -117,8 +117,8 @@ The introduction of the ```Principal``` element makes writing these reference po
 ###### Candidate policy 4: FAIL - allows public access to the sensitive bucket's objects
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [{
+    "Version": "2012-10-17",
+    "Statement": [{
         "Effect": "Allow",
         "Principal": {
             "AWS": "*"
@@ -132,8 +132,8 @@ The introduction of the ```Principal``` element makes writing these reference po
 ###### Candidate policy 5: FAIL - grants access to a principal that was not allowlisted in the reference policy in the Principal element
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [{
+    "Version": "2012-10-17",
+    "Statement": [{
         "Effect": "Allow",
         "Principal": {
             "AWS": "arn:aws:iam::111111111111:role/MyOtherRole"
@@ -148,8 +148,8 @@ The introduction of the ```Principal``` element makes writing these reference po
 ###### Candidate policy 6: FAIL - grants access to a principal that was not allowlisted in the reference policy in the aws:PrincipalArn condition key
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [{
+    "Version": "2012-10-17",
+    "Statement": [{
         "Effect": "Allow",
         "Principal": {
             "AWS": "*"

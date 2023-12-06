@@ -71,37 +71,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive database
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"rds:AddRoleToDBInstance",
-				"rds:ApplyPendingMaintenanceAction",
-				"rds:DeleteDBInstance"
-			],
-			"Resource": "arn:aws:rds:*:*:db:MyNotSensitiveDbInstanceName"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "rds:AddRoleToDBInstance",
+                "rds:ApplyPendingMaintenanceAction",
+                "rds:DeleteDBInstance"
+            ],
+            "Resource": "arn:aws:rds:*:*:db:MyNotSensitiveDbInstanceName"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive database
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "rds:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:rds:*:*:db:MySensitiveDbInstanceName"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "rds:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:rds:*:*:db:MySensitiveDbInstanceName"
+        }
+    ]
 }
 ```
 
@@ -110,41 +110,41 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the ApplyPendingMaintenanceAction action on MySensitiveDbInstanceName
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "rds:ApplyPendingMaintenanceAction",
-			"Resource": "arn:aws:rds:*:*:db:MySensitiveDbInstanceName"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "rds:ApplyPendingMaintenanceAction",
+            "Resource": "arn:aws:rds:*:*:db:MySensitiveDbInstanceName"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use the DeleteDBInstance action and MySensitiveDbInstanceName is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "rds:DeleteDBInstance",
-			"Resource": "arn:aws:rds:*:*:db:*Sensitive*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "rds:DeleteDBInstance",
+            "Resource": "arn:aws:rds:*:*:db:*Sensitive*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 5: FAIL - grants access to use all rds actions and MySensitiveDbInstanceName is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "rds:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "rds:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

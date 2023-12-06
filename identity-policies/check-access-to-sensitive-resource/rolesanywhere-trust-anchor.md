@@ -39,37 +39,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive trust anchor
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"rolesanywhere:DeleteTrustAnchor",
-				"rolesanywhere:DisableTrustAnchor",
-				"rolesanywhere:UpdateTrustAnchor"
-			],
-			"Resource": "arn:aws:rolesanywhere:*:*:trust-anchor/MyNotSensitiveTrustAnchorId"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "rolesanywhere:DeleteTrustAnchor",
+                "rolesanywhere:DisableTrustAnchor",
+                "rolesanywhere:UpdateTrustAnchor"
+            ],
+            "Resource": "arn:aws:rolesanywhere:*:*:trust-anchor/MyNotSensitiveTrustAnchorId"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive trust anchor
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "rolesanywhere:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:rolesanywhere:*:*:trust-anchor/MySensitiveTrustAnchorId"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "rolesanywhere:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:rolesanywhere:*:*:trust-anchor/MySensitiveTrustAnchorId"
+        }
+    ]
 }
 ```
 
@@ -78,27 +78,27 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the DisableTrustAnchor action on MySensitiveTrustAnchorId
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "rolesanywhere:DisableTrustAnchor",
-			"Resource": "arn:aws:rolesanywhere:*:*:trust-anchor/MySensitiveTrustAnchorId"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "rolesanywhere:DisableTrustAnchor",
+            "Resource": "arn:aws:rolesanywhere:*:*:trust-anchor/MySensitiveTrustAnchorId"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use all rolesanywhere actions and MySensitiveTrustAnchorId is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "rolesanywhere:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "rolesanywhere:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

@@ -43,37 +43,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive IAM policy
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"iam:CreatePolicyVersion",
-				"iam:SetDefaultPolicyVersion",
-				"iam:DeletePolicy"
-			],
-			"Resource": "arn:aws:iam::*:policy/MyNotSensitiveIamPolicy"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreatePolicyVersion",
+                "iam:SetDefaultPolicyVersion",
+                "iam:DeletePolicy"
+            ],
+            "Resource": "arn:aws:iam::*:policy/MyNotSensitiveIamPolicy"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive IAM policy
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "iam:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:iam::*:policy/MySensitiveIamPolicy"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "iam:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:iam::*:policy/MySensitiveIamPolicy"
+        }
+    ]
 }
 ```
 
@@ -82,41 +82,41 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the CreatePolicyVersion action on MySensitiveIamPolicy
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "iam:CreatePolicyVersion",
-			"Resource": "arn:aws:iam::*:policy/MySensitiveIamPolicy"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "iam:CreatePolicyVersion",
+            "Resource": "arn:aws:iam::*:policy/MySensitiveIamPolicy"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use the DeletePolicy action and MySensitiveIamPolicy is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "iam:DeletePolicy",
-			"Resource": "arn:aws:iam::*:policy/*Sensitive*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "iam:DeletePolicy",
+            "Resource": "arn:aws:iam::*:policy/*Sensitive*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 5: FAIL - grants access to use all IAM actions and MySensitiveIamPolicy is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "iam:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "iam:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

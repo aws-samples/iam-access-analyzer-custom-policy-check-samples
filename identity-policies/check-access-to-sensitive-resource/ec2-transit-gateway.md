@@ -43,37 +43,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive transit gateway
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"ec2:DeleteTransitGateway",
-				"ec2:ModifyTransitGateway",
-				"ec2:CreateTransitGatewayPeeringAttachment"
-			],
-			"Resource": "arn:aws:ec2:*:*:transit-gateway/tgw-not-sensitive"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DeleteTransitGateway",
+                "ec2:ModifyTransitGateway",
+                "ec2:CreateTransitGatewayPeeringAttachment"
+            ],
+            "Resource": "arn:aws:ec2:*:*:transit-gateway/tgw-not-sensitive"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive transit gateway
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ec2:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:ec2:*:*:transit-gateway/tgw-sensitive"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ec2:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:ec2:*:*:transit-gateway/tgw-sensitive"
+        }
+    ]
 }
 ```
 
@@ -82,27 +82,27 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the CreateTransitGatewayPeeringAttachment action on the sensitive transit gateway
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ec2:CreateTransitGatewayPeeringAttachment",
-			"Resource": "arn:aws:ec2:*:*:transit-gateway/tgw-sensitive"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ec2:CreateTransitGatewayPeeringAttachment",
+            "Resource": "arn:aws:ec2:*:*:transit-gateway/tgw-sensitive"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use all EC2 actions and the sensitive transit gateway is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ec2:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ec2:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

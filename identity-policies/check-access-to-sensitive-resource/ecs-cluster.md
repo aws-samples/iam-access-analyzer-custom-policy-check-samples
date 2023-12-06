@@ -46,37 +46,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive cluster
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"ecs:DeleteCluster",
-				"ecs:UpdateCluster",
-				"ecs:ExecuteCommand"
-			],
-			"Resource": "arn:aws:ecs:*:*:cluster/NotASensitiveCluster"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ecs:DeleteCluster",
+                "ecs:UpdateCluster",
+                "ecs:ExecuteCommand"
+            ],
+            "Resource": "arn:aws:ecs:*:*:cluster/NotASensitiveCluster"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive cluster
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ecs:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:ecs:*:*:cluster/MySensitiveCluster"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ecs:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:ecs:*:*:cluster/MySensitiveCluster"
+        }
+    ]
 }
 ```
 
@@ -85,41 +85,41 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the ExecuteCommand action on MySensitiveCluster
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ecs:ExecuteCommand",
-			"Resource": "arn:aws:ecs:*:*:cluster/MySensitiveCluster"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ecs:ExecuteCommand",
+            "Resource": "arn:aws:ecs:*:*:cluster/MySensitiveCluster"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use the DeleteCluster action and MySensitiveCluster is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ecs:DeleteCluster",
-			"Resource": "arn:aws:ecs:*:*:cluster/*Sensitive*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ecs:DeleteCluster",
+            "Resource": "arn:aws:ecs:*:*:cluster/*Sensitive*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 5: FAIL - grants access to use all ECS actions and MySensitiveCluster is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ecs:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ecs:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

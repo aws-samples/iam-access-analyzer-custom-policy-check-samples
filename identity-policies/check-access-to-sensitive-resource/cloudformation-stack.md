@@ -59,37 +59,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive stack
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"cloudformation:UpdateStack",
-				"cloudformation:DeleteStack",
-				"cloudformation:RollbackStack"
-			],
-			"Resource": "arn:aws:cloudformation:*:*:stack/NotMySensitiveStack/*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudformation:UpdateStack",
+                "cloudformation:DeleteStack",
+                "cloudformation:RollbackStack"
+            ],
+            "Resource": "arn:aws:cloudformation:*:*:stack/NotMySensitiveStack/*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive stack
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "cloudformation:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:cloudformation:*:*:stack/MySensitiveStack/*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "cloudformation:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:cloudformation:*:*:stack/MySensitiveStack/*"
+        }
+    ]
 }
 ```
 
@@ -98,41 +98,41 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the DeleteStack action on stack/MySensitiveStack/*
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "cloudformation:DeleteStack",
-			"Resource": "arn:aws:cloudformation:*:*:stack/MySensitiveStack/*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "cloudformation:DeleteStack",
+            "Resource": "arn:aws:cloudformation:*:*:stack/MySensitiveStack/*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 3: FAIL - grants access to use the DeleteStack action and stack/MySensitiveStack/* is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "cloudformation:DeleteStack",
-			"Resource": "arn:aws:cloudformation:*:*:stack/*Sensitive*/*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "cloudformation:DeleteStack",
+            "Resource": "arn:aws:cloudformation:*:*:stack/*Sensitive*/*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use all CloudFormation actions and stack/MySensitiveStack/* is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "cloudformation:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "cloudformation:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

@@ -37,37 +37,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive profile
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"rolesanywhere:DeleteProfile",
-				"rolesanywhere:DisableProfile",
-				"rolesanywhere:UpdateProfile"
-			],
-			"Resource": "arn:aws:rolesanywhere:*:*:profile/MyNotSensitiveProfileId"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "rolesanywhere:DeleteProfile",
+                "rolesanywhere:DisableProfile",
+                "rolesanywhere:UpdateProfile"
+            ],
+            "Resource": "arn:aws:rolesanywhere:*:*:profile/MyNotSensitiveProfileId"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive profile
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "rolesanywhere:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:rolesanywhere:*:*:profile/MySensitiveProfileId"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "rolesanywhere:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:rolesanywhere:*:*:profile/MySensitiveProfileId"
+        }
+    ]
 }
 ```
 
@@ -76,27 +76,27 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the DisableProfile action on MySensitiveProfileId
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "rolesanywhere:DisableProfile",
-			"Resource": "arn:aws:rolesanywhere:*:*:profile/MySensitiveProfileId"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "rolesanywhere:DisableProfile",
+            "Resource": "arn:aws:rolesanywhere:*:*:profile/MySensitiveProfileId"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use all rolesanywhere actions and MySensitiveProfileId is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "rolesanywhere:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "rolesanywhere:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

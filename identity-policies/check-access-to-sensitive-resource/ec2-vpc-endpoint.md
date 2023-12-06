@@ -40,37 +40,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive VPC endpoint
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"ec2:ModifyVpcEndpoint",
-				"ec2:DeleteVpcEndpoints",
-				"ec2:CreateTrafficMirrorTarget"
-			],
-			"Resource": "arn:aws:ec2:*:*:vpc-endpoint/vpce-not-sensitive"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:ModifyVpcEndpoint",
+                "ec2:DeleteVpcEndpoints",
+                "ec2:CreateTrafficMirrorTarget"
+            ],
+            "Resource": "arn:aws:ec2:*:*:vpc-endpoint/vpce-not-sensitive"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive VPC endpoint
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ec2:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:ec2:*:*:vpc-endpoint/vpce-sensitive"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ec2:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:ec2:*:*:vpc-endpoint/vpce-sensitive"
+        }
+    ]
 }
 ```
 
@@ -79,27 +79,27 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the CreateTags action on the sensitive VPC endpoint
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ec2:ModifyVpcEndpoint",
-			"Resource": "arn:aws:ec2:*:*:vpc-endpoint/vpce-sensitive"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ec2:ModifyVpcEndpoint",
+            "Resource": "arn:aws:ec2:*:*:vpc-endpoint/vpce-sensitive"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use all EC2 actions and the sensitive VPC endpoint is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "ec2:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "ec2:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

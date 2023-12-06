@@ -68,37 +68,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive cluster
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"rds:AddRoleToDBCluster",
-				"rds:ApplyPendingMaintenanceAction",
-				"rds:DeleteDBCluster"
-			],
-			"Resource": "arn:aws:rds:*:*:cluster:MyNotSensitiveClusterName"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "rds:AddRoleToDBCluster",
+                "rds:ApplyPendingMaintenanceAction",
+                "rds:DeleteDBCluster"
+            ],
+            "Resource": "arn:aws:rds:*:*:cluster:MyNotSensitiveClusterName"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive cluster
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "rds:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:rds:*:*:cluster:MySensitiveClusterName"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "rds:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:rds:*:*:cluster:MySensitiveClusterName"
+        }
+    ]
 }
 ```
 
@@ -107,41 +107,41 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the DeleteDBCluster action on MySensitiveClusterName
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "rds:DeleteDBCluster",
-			"Resource": "arn:aws:rds:*:*:cluster:MySensitiveClusterName"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "rds:DeleteDBCluster",
+            "Resource": "arn:aws:rds:*:*:cluster:MySensitiveClusterName"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use the DeleteDBCluster action and MySensitiveClusterName is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "rds:DeleteDBCluster",
-			"Resource": "arn:aws:rds:*:*:cluster:*Sensitive*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "rds:DeleteDBCluster",
+            "Resource": "arn:aws:rds:*:*:cluster:*Sensitive*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 5: FAIL - grants access to use all rds actions and MySensitiveClusterName is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "rds:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "rds:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```

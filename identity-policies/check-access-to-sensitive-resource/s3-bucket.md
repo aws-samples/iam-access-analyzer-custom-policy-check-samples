@@ -79,37 +79,37 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 1: PASS - does not grant access to sensitive bucket
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": [
-				"s3:DeleteBucket",
-				"s3:DeleteBucketPolicy",
-				"s3:PutBucketPolicy"
-			],
-			"Resource": "arn:aws:s3:::my-not-sensitive-bucket"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:DeleteBucket",
+                "s3:DeleteBucketPolicy",
+                "s3:PutBucketPolicy"
+            ],
+            "Resource": "arn:aws:s3:::my-not-sensitive-bucket"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 2: PASS - explicitly denies access to sensitive bucket
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "s3:*",
-			"Resource": "*"
-		}, 
-		{
-			"Effect": "Deny",
-			"Action": "*",
-			"Resource": "arn:aws:s3:::my-sensitive-bucket"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "s3:*",
+            "Resource": "*"
+        }, 
+        {
+            "Effect": "Deny",
+            "Action": "*",
+            "Resource": "arn:aws:s3:::my-sensitive-bucket"
+        }
+    ]
 }
 ```
 
@@ -118,41 +118,41 @@ This reference policy checks if a candidate policy grants access to any of the l
 ###### Candidate policy 3: FAIL - grants access to use the DeleteBucketPolicy action on my-sensitive-bucket
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "s3:DeleteBucketPolicy",
-			"Resource": "arn:aws:s3:::my-sensitive-bucket"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "s3:DeleteBucketPolicy",
+            "Resource": "arn:aws:s3:::my-sensitive-bucket"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 4: FAIL - grants access to use the PutBucketPolicy action and my-sensitive-bucket is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "s3:PutBucketPolicy",
-			"Resource": "arn:aws:s3:*:*:*sensitive*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "s3:PutBucketPolicy",
+            "Resource": "arn:aws:s3:*:*:*sensitive*"
+        }
+    ]
 }
 ```
 
 ###### Candidate policy 5: FAIL - grants access to use all s3 actions and my-sensitive-bucket is included in the resource wildcard.
 ```json
 {
-	"Version": "2012-10-17",
-	"Statement": [
-		{
-			"Effect": "Allow",
-			"Action": "s3:*",
-			"Resource": "*"
-		}
-	]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "s3:*",
+            "Resource": "*"
+        }
+    ]
 }
 ```
